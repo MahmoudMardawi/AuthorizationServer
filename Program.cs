@@ -11,6 +11,31 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<DbContext>(options =>
+{
+    options.UseInMemoryDatabase(nameof(DbContext));
+    options.UseOpenIddict();
+});
+builder.Services.AddOpenIddict()
+    .AddCore(options =>
+{
+    options.UseEntityFrameworkCore()
+    .UseDbContext<DbContext>();
+})
+    .AddServer(options =>
+    {
+        options
+        .AllowClientCredentialsFlow();
+        options
+        .SetTokenEndpointUris("/connect/token");
+        options
+        .AddEphemeralEncryptionKey().AddEphemeralSigningKey();
+        options
+        .RegisterScopes("api");
+        options
+        .UseAspNetCore().EnableTokenEndpointPassthrough();
+    });
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
         .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
         {
