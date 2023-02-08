@@ -27,13 +27,9 @@ builder.Services.AddOpenIddict()
     {
         options
         .AllowAuthorizationCodeFlow()
-        .RequireProofKeyForCodeExchange();
-        options
-        .AllowClientCredentialsFlow();
-        options
-        .SetAuthorizationEndpointUris("/connect/authorize")
-        .SetTokenEndpointUris("/connect/token");
-
+        .RequireProofKeyForCodeExchange()
+        .AllowClientCredentialsFlow()
+        .AllowRefreshTokenFlow();
         options
         .AddEphemeralEncryptionKey()
         .AddEphemeralSigningKey()
