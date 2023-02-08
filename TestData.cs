@@ -35,9 +35,10 @@ namespace AuthorizationServer
                         OpenIddictConstants.Permissions.Endpoints.Token,
                         OpenIddictConstants.Permissions.GrantTypes.AuthorizationCode,
                         OpenIddictConstants.Permissions.GrantTypes.ClientCredentials,
+                        OpenIddictConstants.Permissions.GrantTypes.RefreshToken,
                         OpenIddictConstants.Permissions.Prefixes.Scope + "api",
                         OpenIddictConstants.Permissions.ResponseTypes.Code
-                    }
+}
                 }, cancellationToken);
             }
         }
