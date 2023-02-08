@@ -75,10 +75,9 @@ if (app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();
-//The authentication middleware,
-//which uses the registered authentication schemes,
-//is added by calling the UseAuthentication extension method on the app's IApplicationBuilder
+app.UseAuthentication(); 
+app.UseAuthorization();
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapDefaultControllerRoute();
