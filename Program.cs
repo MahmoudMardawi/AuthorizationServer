@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using AuthorizationServer;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -35,7 +36,7 @@ builder.Services.AddOpenIddict()
         options
         .UseAspNetCore().EnableTokenEndpointPassthrough();
     });
-
+builder.Services.AddHostedService<TestData>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
         .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
         {
