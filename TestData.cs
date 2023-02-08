@@ -30,10 +30,12 @@ namespace AuthorizationServer
                     DisplayName = "Postman",
                     Permissions =
                     {
+                        OpenIddictConstants.Permissions.Endpoints.Authorization,
                         OpenIddictConstants.Permissions.Endpoints.Token,
+                        OpenIddictConstants.Permissions.GrantTypes.AuthorizationCode,
                         OpenIddictConstants.Permissions.GrantTypes.ClientCredentials,
-
-                        OpenIddictConstants.Permissions.Prefixes.Scope + "api"
+                        OpenIddictConstants.Permissions.Prefixes.Scope + "api",
+                        OpenIddictConstants.Permissions.ResponseTypes.Code
                     }
                 }, cancellationToken);
             }
