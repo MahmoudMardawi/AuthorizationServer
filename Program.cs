@@ -30,12 +30,16 @@ builder.Services.AddOpenIddict()
         options
         .SetTokenEndpointUris("/connect/token");
         options
-        .AddEphemeralEncryptionKey().AddEphemeralSigningKey();
+        .AddEphemeralEncryptionKey()
+        .AddEphemeralSigningKey()
+        .DisableAccessTokenEncryption();
         options
         .RegisterScopes("api");
         options
         .UseAspNetCore().EnableTokenEndpointPassthrough();
+
     });
+
 builder.Services.AddHostedService<TestData>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
         .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
