@@ -10,8 +10,8 @@ namespace AuthorizationServer.Controllers
 {
     public class AuthorizationController : Controller
     {
-        [HttpPost("~/connect/token")]
-        public IActionResult Exchange()
+        [HttpPost("~/connect/token"), Produces("application/json")]
+        public async Task<IActionResult> Exchange()
         {
             var request = HttpContext.GetOpenIddictServerRequest() ??
                           throw new InvalidOperationException("The OpenID Connect request cannot be retrieved.");
@@ -35,7 +35,12 @@ namespace AuthorizationServer.Controllers
 
                 claimsPrincipal.SetScopes(request.GetScopes());
             }
-
+            else 
+            if (request.IsAuthorizationCodeGrantType())
+            {
+                // Retrieve the claims principal stored in the authorization code
+                claimsPrincipal = (await HttpContext.AuthenticateAsync(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme)).Principal;
+            }
             else
             {
                 throw new InvalidOperationException("The specified grant type is not supported.");
