@@ -76,7 +76,9 @@ namespace AuthorizationServer.Controllers
             {
                 // 'subject' claim which is required
                 new Claim(OpenIddictConstants.Claims.Subject, result.Principal.Identity.Name),
-                new Claim("some claim", "some value").SetDestinations(OpenIddictConstants.Destinations.AccessToken)
+                new Claim("some claim", "some value").SetDestinations(OpenIddictConstants.Destinations.AccessToken),    
+                new Claim(OpenIddictConstants.Claims.Email, "some@email").SetDestinations(OpenIddictConstants.Destinations.IdentityToken)
+
             };
 
             var claimsIdentity = new ClaimsIdentity(claims, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
