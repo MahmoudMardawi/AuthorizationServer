@@ -41,7 +41,9 @@ builder.Services.AddOpenIddict()
         options
         .RegisterScopes("api");
         options
-        .UseAspNetCore().EnableTokenEndpointPassthrough();
+        .UseAspNetCore()
+        .EnableAuthorizationEndpointPassthrough()
+        .EnableTokenEndpointPassthrough();
         options
         .SetAuthorizationEndpointUris("/connect/authorize")
         .SetTokenEndpointUris("/connect/token");
