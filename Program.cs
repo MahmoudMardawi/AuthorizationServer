@@ -40,13 +40,17 @@ builder.Services.AddOpenIddict()
         .DisableAccessTokenEncryption();
         options
         .RegisterScopes("api");
-        options
-        .UseAspNetCore()
-        .EnableAuthorizationEndpointPassthrough()
-        .EnableTokenEndpointPassthrough();
+     
         options
         .SetAuthorizationEndpointUris("/connect/authorize")
-        .SetTokenEndpointUris("/connect/token");
+        .SetTokenEndpointUris("/connect/token")
+        .SetUserinfoEndpointUris("/connect/userinfo");
+        options
+        .UseAspNetCore()
+        .EnableTokenEndpointPassthrough()
+        .EnableAuthorizationEndpointPassthrough()
+        .EnableUserinfoEndpointPassthrough();
+
 
     });
 
